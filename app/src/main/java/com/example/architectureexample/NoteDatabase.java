@@ -11,13 +11,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
 
-@Database(entities = {Note.class}, version = 1)
+@Database(entities = {Note.class, Category.class}, version = 2)
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
 
     // Entspricht getNoteDao Objekt
     public abstract NoteDao getNoteDao();
+    public abstract CategoryDao getCategoryDao();
 
     public static synchronized NoteDatabase getInstance(Context context){
         if (instance == null){
@@ -40,15 +41,21 @@ public abstract class NoteDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask <Void, Void, Void> {
         private NoteDao noteDao;
+        private CategoryDao categoryDao;
 
         private  PopulateDbAsyncTask (NoteDatabase db){
             noteDao = db.getNoteDao();
+            categoryDao = db.getCategoryDao();
+
         }
         @Override
         protected Void doInBackground(Void... voids) {
             noteDao.insert(new Note ("Title1", "Description1", 1));
             noteDao.insert(new Note ("Title2", "Description2", 2));
             noteDao.insert(new Note ("Title3", "Description3", 3));
+            categoryDao.insert(new Category("Shopping", "blue"));
+            categoryDao.insert(new Category("Books", "yellow"));
+            categoryDao.insert(new Category("Movies", "orange"));
             return null;
         }
     }

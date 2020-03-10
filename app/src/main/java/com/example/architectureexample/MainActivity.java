@@ -23,7 +23,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
+    public static final int SHOW_CATEGORY_REQUEST = 3;
     private NoteViewModel noteViewModel;
+    private CategoryViewModel categoryViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        FloatingActionButton buttonSeeCategory = findViewById(R.id.button_see_categories);
+        buttonSeeCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShowAllCategories.class);
+                startActivityForResult(intent, SHOW_CATEGORY_REQUEST);
+            }
+
+        });
+
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -55,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Show notes", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -100,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1);
 
-            if (id == -1){
+            if (id == -1) {
                 Toast.makeText(this, "Note can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -131,7 +145,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.delete_all_notes:
                 noteViewModel.deleteAllNotes();
                 Toast.makeText(this, "All notes deleted", Toast.LENGTH_SHORT).show();
-                return true;
+
+            case R.id.delete_all_categories:
+                categoryViewModel.deleteAllCategories();
+
+            case R.id.select_all_categories:
+                categoryViewModel.getAllCategories();
+
             default:
                 return super.onOptionsItemSelected(item);
         }

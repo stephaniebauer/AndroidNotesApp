@@ -2,7 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/select_all_categories"
+        android:title="Categories" />
+
+    <item
         android:id="@+id/delete_all_notes"
         android:title="Delete all notes"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete_all_categories"
+        android:title="Delete all categories"
+        app:showAsAction="never" />
+
 </menu>
