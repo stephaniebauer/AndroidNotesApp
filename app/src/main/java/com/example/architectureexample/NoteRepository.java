@@ -4,8 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Delete;
-import androidx.room.Update;
+
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class NoteRepository {
 
     public NoteRepository (Application application){
         NoteDatabase database = NoteDatabase.getInstance(application);
-        noteDao = database.noteDao();
+        noteDao = database.getNoteDao();
         allNotes = noteDao.getAllNotes();
     }
 
@@ -39,6 +38,7 @@ public class NoteRepository {
         return allNotes;
     }
 
+    //statisch um keine Referenz zum Repository zu schaffen, sonst Memory Leak
     private static class InsertNoteAsyncTask extends AsyncTask<Note, Void, Void>{
         private NoteDao noteDao;
 

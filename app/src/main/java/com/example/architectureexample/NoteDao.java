@@ -1,7 +1,5 @@
 package com.example.architectureexample;
 
-import android.view.View;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;

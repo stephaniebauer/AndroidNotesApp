@@ -31,7 +31,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.edit_text_description);
         numberPickerPriority = findViewById(R.id.number_picker_priority);
 
-        numberPickerPriority.setMaxValue(1);
+        numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);

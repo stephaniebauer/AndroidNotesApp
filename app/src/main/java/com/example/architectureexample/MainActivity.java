@@ -1,7 +1,6 @@
 package com.example.architectureexample;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -51,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
         noteViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()).create(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
-            public void onChanged(@Nullable List<Note> notes) {
+            public void onChanged(List<Note> notes) {
                 adapter.submitList(notes);
+                Toast.makeText(MainActivity.this, "Show notes", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_NOTE_REQUEST && resultCode == RESULT_OK) {
