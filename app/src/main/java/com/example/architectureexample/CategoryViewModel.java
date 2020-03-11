@@ -5,10 +5,12 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
-public class CategoryViewModel extends AndroidViewModel {
+public class CategoryViewModel extends AndroidViewModel{
     private CategoryRepository repository;
     private LiveData<List<Category>> allCategories;
 
