@@ -37,4 +37,7 @@ public class NoteViewModel extends AndroidViewModel {
     public LiveData<List<Note>> getAllNotes(){
         return allNotes;
     }
+
+    //Anpassen
+    //public LiveData<List<Note>> findNotesForCategory (int categoryId) {return allNotes};
 }

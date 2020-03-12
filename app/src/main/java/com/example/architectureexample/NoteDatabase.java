@@ -11,12 +11,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
 
-@Database(entities = {Note.class, Category.class}, version = 2)
+@Database(entities = {Note.class, Category.class}, version = 4)
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
 
-    // Entspricht getNoteDao Objekt
     public abstract NoteDao getNoteDao();
     public abstract CategoryDao getCategoryDao();
 
@@ -50,12 +49,12 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Note ("Title1", "Description1", 1));
-            noteDao.insert(new Note ("Title2", "Description2", 2));
-            noteDao.insert(new Note ("Title3", "Description3", 3));
-            categoryDao.insert(new Category("Shopping", "blue"));
-            categoryDao.insert(new Category("Books", "yellow"));
-            categoryDao.insert(new Category("Movies", "orange"));
+            categoryDao.insert(new Category("Shopping", "blue",1));
+            categoryDao.insert(new Category("Books", "yellow",2));
+            categoryDao.insert(new Category("Movies", "orange",3));
+            noteDao.insert(new Note ("Title1", "Description1", 1, 1));
+            noteDao.insert(new Note ("Title2", "Description2", 2, 2));
+            noteDao.insert(new Note ("Title3", "Description3", 3, 3));
             return null;
         }
     }

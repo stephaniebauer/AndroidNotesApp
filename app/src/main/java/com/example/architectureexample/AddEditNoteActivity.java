@@ -17,10 +17,12 @@ public class AddEditNoteActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "com.example.architectureexample.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION = "com.example.architectureexample.EXTRA_DESCRIPTION";
     public static final String EXTRA_PRIORITY = "com.example.architectureexample.EXTRA_PRIORITY";
+    public static final String EXTRA_CATEGORYID = "com.example.architectureexample.EXTRA_CATEGORYID";
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
+    private EditText editTextCategoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
         numberPickerPriority = findViewById(R.id.number_picker_priority);
+        editTextCategoryId = findViewById(R.id.edit_text_categoryId);
 
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
@@ -43,6 +46,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1));
+            editTextCategoryId.setText(intent.getStringExtra(EXTRA_CATEGORYID));
         } else {
             setTitle("Add Note");
         }
@@ -52,6 +56,8 @@ public class AddEditNoteActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
+        String categoryId = editTextCategoryId.getText().toString();
+
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
@@ -61,7 +67,8 @@ public class AddEditNoteActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
-        data.putExtra(EXTRA_PRIORITY, priority);
+        data.putExtra(EXTRA_CATEGORYID, categoryId);
+
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
